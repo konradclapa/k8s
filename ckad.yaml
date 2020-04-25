@@ -30,3 +30,12 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Never
 status: {}
+
+
+
+
+kubectl create quota myrq --hard=cpu=1,memory=1G,pods=2 --dry-run -o yaml
+
+kubectl run busybox --image=busybox -it --restart=Never -- echo 'hello world'
+# or
+kubectl run busybox --image=busybox -it --restart=Never -- /bin/sh -c 'echo hello world'
