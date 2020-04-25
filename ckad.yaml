@@ -1,0 +1,32 @@
+kubectl run busybox --image=busybox --command --restart=Never -it -- env # -it will help in seeing the output
+# or, just run it without -it
+kubectl run busybox --image=busybox --command --restart=Never -- env
+# and then, check its logs
+kubectl logs busybox
+
+
+
+
+# create a  YAML template with this command
+kubectl run busybox --image=busybox --restart=Never --dry-run -o yaml --command -- env > envpod.yaml
+# see it
+cat envpod.yaml
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: busybox
+  name: busybox
+spec:
+  containers:
+  - command:
+    - env
+    image: busybox
+    name: busybox
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
